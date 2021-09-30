@@ -51,20 +51,12 @@ private:
     /* data */
     string content;
 public:
-    Parse(/* args */);
-    ~Parse();
+    Parse(/* args */){}
+    ~Parse(){}
 
     void parsing(ifstream &infile, unordered_map <string, Node> &graph);
-    void printContent(){cout << content << '\n'; cout << "END";}
+    void printContent(){cout << content << '\n'; cout << "END" << endl;}
 };
-
-Parse::Parse(/* args */)
-{
-}
-
-Parse::~Parse()
-{
-}
 
 void Parse::parsing(ifstream &infile, unordered_map <string, Node> &graph)
 {
@@ -146,28 +138,4 @@ void Parse::parsing(ifstream &infile, unordered_map <string, Node> &graph)
                 equation += " + " + term;
         }
     }
-}
-
-int main(int argc, char* argv[])
-{
-    ifstream infile(argv[argc - 1]);
-    if(!infile) {cerr << "The file is not exist! " << endl; exit(1);}
-    unordered_map <string, Node> graph;
-
-    Parse parser;
-    parser.parsing(infile, graph);
-    parser.printContent();
-
-    string node; 
-    cout << "Please input a node: ";
-    while (cin >> node){
-        if(node == "0") break;
-        if(graph.count(node) == 0) cout << "node" << node <<  "does not exist" << endl;
-        else {
-            cout << "predecessor: "; graph[node].finls(); 
-            cout << "successor: "; graph[node].foutls();
-        }
-        cout << "Please input a node: ";
-    }
-    
 }
